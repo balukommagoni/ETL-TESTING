@@ -1,0 +1,32 @@
+ETL Assignment-3
+
+1.select count(DimGeography.EnglishCountryRegionName)
+from ((DimCustomer inner join DimGeography on DimCustomer.GeographyKey=DimGeography.GeographyKey)
+inner join FactInternetSales on DimCustomer.CustomerKey=FactInternetSales.CustomerKey) where EnglishCountryRegionName='Canada' group by(EnglishCountryRegionName);
+
+select count(DimGeography.EnglishCountryRegionName)
+from ((DimCustomer inner join DimGeography on DimCustomer.GeographyKey=DimGeography.GeographyKey)
+inner join FactInternetSales on DimCustomer.CustomerKey=FactInternetSales.CustomerKey) where EnglishCountryRegionName='france' group by(EnglishCountryRegionName);
+
+select count(DimGeography.EnglishCountryRegionName)
+from ((DimCustomer inner join DimGeography on DimCustomer.GeographyKey=DimGeography.GeographyKey)
+inner join FactInternetSales on DimCustomer.CustomerKey=FactInternetSales.CustomerKey) where EnglishCountryRegionName='united states' group by(EnglishCountryRegionName);
+
+select count(DimGeography.EnglishCountryRegionName)
+from ((DimCustomer inner join DimGeography on DimCustomer.GeographyKey=DimGeography.GeographyKey)
+inner join FactInternetSales on DimCustomer.CustomerKey=FactInternetSales.CustomerKey) where EnglishCountryRegionName='united kingdom' group by(EnglishCountryRegionName);
+
+select count(DimGeography.EnglishCountryRegionName)
+from ((DimCustomer inner join DimGeography on DimCustomer.GeographyKey=DimGeography.GeographyKey)
+inner join FactInternetSales on DimCustomer.CustomerKey=FactInternetSales.CustomerKey) where EnglishCountryRegionName='australia' group by(EnglishCountryRegionName);
+
+select count(DimGeography.EnglishCountryRegionName)
+from ((DimCustomer inner join DimGeography on DimCustomer.GeographyKey=DimGeography.GeographyKey)
+inner join FactInternetSales on DimCustomer.CustomerKey=FactInternetSales.CustomerKey) where EnglishCountryRegionName='germany' group by(EnglishCountryRegionName);
+
+2.select count(SalesAmount) as TotalSalesAmount
+from ((DimCustomer inner join DimGeography on DimCustomer.GeographyKey=DimGeography.GeographyKey)
+inner join FactInternetSales on DimCustomer.CustomerKey=FactInternetSales.CustomerKey)
+where City='australia' and SalesAmount>30000 group by(SalesAmount);
+
+3.select AccountDescription from DimAccount

@@ -1,0 +1,79 @@
+--ETL TESTING--
+
+SELECT
+ACO.ORDERING_PROVIDER_FAMILY_NAME,
+CTLT.SRC_ORD_PROV_FAM_NM
+FROM
+OLTP..T_LAB_TEST CTLT
+JOIN STAGING..COMMON_ORDER ACO
+ON ACO.FILTER_ORDER_NBR = CTLT.FILL_ORDER_NBR AND CTLT.SRC_SYS_KEY=9
+WHERE ACO.ORDERING_PROVIDER_FAMILY_NAME IS NULL AND CTLT.SRC_ORD_PROV_FAM_NM='';
+
+SELECT 
+AREF.MEME_CK
+nvl(ACO.ORDERING_PROVIDER_FAMILY_NAME,'Not Provided')
+FROM STAGING..COMMON_ORDER ACO
+JOIN STAGING..LAB_MBR_MATCH_XREF AREF
+ON ACO.PID_KEY=AREF.PID_KEY AND AREF.MEME_CK <> 0
+EXCEPT
+SELECT
+CMBR.SRC_SYS_MBR_ID,
+CTLT.SRC_ORD_PROV_FAM_NM
+FROM OLTP.SRC_ORD_PROV_FAM_NM
+JOIN OLTP..T_MBR CMBR
+ON CTLT.MBR_KEY=CMBR.MBR_KEY AND CTLT.SRC_SYS_KEY=9;
+
+SELECT COUNT(*)
+FROM STAGING..COMMON_ORDER ACO
+JOIN STAGING..LAB_MBR_MATCH_XREF AREF
+ON ACO.PID_KEY=AREF.PID_KEY;
+
+SELECT COUNT(*)
+FROM OLTP..T_LAB_TEST CTLT
+JOIN OLTP..T_MBR CMBR
+ON CTLT.MBR_KEY=CMBR.MBR_KEY
+
+--CYPRESS AUTOMATION--
+
+/// <reference types="Cypress"/>
+
+describe('redbus',function()
+{
+    it('redbusTest',function()
+    {
+        cy.visit('https://www.redbus.in/') 
+        //visit page
+        cy.get('#src').type('Hyderabad')
+        //from
+        cy.get('[class="selected"]').click()
+        //select from
+        cy.get('#dest').type('Banglore')
+        //to
+        cy.get('[class="selected"]').click()
+        //select to
+        cy.get('.text-trans-uc').click()
+        //select
+        cy.get('[class="current day"]').click()
+        //day
+        cy.get('#search_btn').click()
+        //select all
+        cy.get(':nth-child(4) > :nth-child(1) > .custom-checkbox').click()
+        //checkbox
+        cy.get('.button').click()
+        //view tickets
+        cy.get(':nth-child(8) > input').click()
+        //boarding point
+        cy.get('[data-value="Ameerpet"] > .custom-checkbox').click()
+        //select address
+        cy.get('.btn-apply').click()
+        //select click button
+        cy.get(':nth-child(11) > input').click()
+        //drop point
+        cy.get('[data-value="Hebbal"] > .custom-checkbox').click()
+        //drop address select
+        cy.get('.btn-apply').click()
+        //select click button
+        cy.get('canvas[class="pointer"]').click()
+    }
+    )
+})

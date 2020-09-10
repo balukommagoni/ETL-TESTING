@@ -1,0 +1,93 @@
+--ETL TESTING--
+
+use AdventureWorksDW2017
+
+select * from Employee
+drop table Employee
+
+CREATE TABLE dbo.Employee (
+    EmpID int NOT NULL PRIMARY KEY,
+    FirstName varchar(50),
+    MiddleName varchar(50),
+    LastName varchar(50),
+    DateofBirth date,
+    EmailAddress varchar(50)
+);
+
+INSERT INTO dbo.Employee (EmpID ,FirstName ,MiddleName ,LastName ,DateofBirth,EmailAddress)
+VALUES (1, 'Ramesh','rathod','goud', '19810824', 'ramesh@gmail.com');
+
+
+INSERT INTO dbo.Employee (EmpID ,FirstName ,MiddleName ,LastName ,DateofBirth,EmailAddress)
+VALUES (2, 'Khilan','raki','pradeep', '19800824', 'Khilan@gmail.com' );
+
+INSERT INTO dbo.Employee (EmpID ,FirstName ,MiddleName ,LastName ,DateofBirth,EmailAddress)
+VALUES (3, 'kaushik','shiva','nani', '19910824', 'kaushik@gmail.com' );
+
+INSERT INTO dbo.Employee (EmpID ,FirstName ,MiddleName ,LastName ,DateofBirth,EmailAddress)
+VALUES (4, 'Chaitali','praveen','bittu', '19610824', 'chaitali@gmail.com' );
+
+INSERT INTO dbo.Employee (EmpID ,FirstName ,MiddleName ,LastName ,DateofBirth,EmailAddress)
+VALUES (5, 'Hardik','pandya','kiran', '20060824', 'hardik@gmail.com');
+
+INSERT INTO dbo.Employee (EmpID ,FirstName ,MiddleName ,LastName ,DateofBirth,EmailAddress)
+VALUES (6, 'komal','konapur','yendru', '20050824', 'komal@gmail.com');
+
+INSERT INTO dbo.Employee (EmpID ,FirstName ,MiddleName ,LastName ,DateofBirth,EmailAddress)
+VALUES (7, 'srinu','kumar','kerti', '20020824', 'srinu@gmail.com');
+
+INSERT INTO dbo.Employee (EmpID ,FirstName ,MiddleName ,LastName ,DateofBirth,EmailAddress)
+VALUES (8, 'vamshi','anumadla','reddy', '20040824', 'vamshi@gmail.com');
+
+INSERT INTO dbo.Employee  (EmpID ,FirstName ,MiddleName ,LastName ,DateofBirth,EmailAddress)
+VALUES (9, 'balu','komma','goni', '19980824', 'balu@gmail.com');
+
+INSERT INTO dbo.Employee  (EmpID ,FirstName ,MiddleName ,LastName ,DateofBirth,EmailAddress)
+VALUES (10, 'sunil','jushi','bapan', '20010824', 'sunil@gmail.com');
+
+
+ALTER TABLE Employee DROP PRIMARY KEY,ADD PRIMARY KEY (EmailAddress);
+
+select EmpID from Employee where EmpID=(select * from Employee where LastName='kerti')
+
+select EmpID from Employee where DateofBirth between '19800101' and 'sysdate'
+
+--CYPRESS AUTOMATION--
+
+cy.contains('Login').click()
+cy.url().should('include', 'profile')
+// retries until cookie with value=189jd09su
+// is found or default command timeout ends
+cy.getCookie('session_id')
+  .should('have.property', 'value', '189jd09su')
+  .then((cookie) => {
+    // cookie is an object with "domain", "name" and other properties
+  })
+
+{
+  "reporter": "mochawesome",
+  "reporterOptions": {
+    "reportDir": "cypress/results",
+    "overwrite": false,
+    "html": false,
+    "json": true
+  }
+}
+
+it('completes todo', () => {
+  cy.visit('/')
+  cy.get('.new-todo').type('write tests{enter}')
+  cy.contains('.todo-list li', 'write tests')
+    .find('.toggle')
+    .check()
+
+  cy.contains('.todo-list li', 'write tests')
+    .should('have.class', 'completed')
+
+  // run 'npm i cypress-plugin-snapshots -S'
+  // capture the element screenshot and
+  // compare to the baseline image
+  cy.get('.todoapp').toMatchImageSnapshot({
+    threshold: 0.001,
+  })
+})

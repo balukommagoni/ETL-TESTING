@@ -1,0 +1,88 @@
+USE [AdventureWorksDW2017]
+GO
+
+ETL ASSIGNMENT_1
+
+1.CREATE TABLE dbo.Employee (
+    EmpID int, 
+    FirstName varchar(50),
+    MiddleName varchar(50),
+    LastName varchar(50),
+    DateofBirth date,
+    EmailAddress varchar(50)
+);
+
+2.INSERT INTO dbo.Employee (EmpID ,FirstName ,MiddleName ,LastName ,DateofBirth,EmailAddress)
+VALUES (1, 'Ramesh','rathod','goud', '19810824', 'ramesh@gmail.com');
+
+INSERT INTO dbo.Employee (EmpID ,FirstName ,MiddleName ,LastName ,DateofBirth,EmailAddress)
+VALUES (2, 'Khilan','raki','pradeep', '19800824', 'Khilan@gmail.com' );
+
+INSERT INTO dbo.Employee (EmpID ,FirstName ,MiddleName ,LastName ,DateofBirth,EmailAddress)
+VALUES (3, 'kaushik','shiva','nani', '19910824', 'kaushik@gmail.com' );
+
+INSERT INTO dbo.Employee (EmpID ,FirstName ,MiddleName ,LastName ,DateofBirth,EmailAddress)
+VALUES (4, 'Chaitali','praveen','bittu', '19610824', 'chaitali@gmail.com' );
+
+INSERT INTO dbo.Employee (EmpID ,FirstName ,MiddleName ,LastName ,DateofBirth,EmailAddress)
+VALUES (5, 'Hardik','pandya','kiran', '20060824', 'hardik@gmail.com');
+
+INSERT INTO dbo.Employee (EmpID ,FirstName ,MiddleName ,LastName ,DateofBirth,EmailAddress)
+VALUES (6, 'komal','konapur','yendru', '20050824', 'komal@gmail.com');
+
+INSERT INTO dbo.Employee (EmpID ,FirstName ,MiddleName ,LastName ,DateofBirth,EmailAddress)
+VALUES (7, 'srinu','kumar','kerti', '20020824', 'srinu@gmail.com');
+
+INSERT INTO dbo.Employee (EmpID ,FirstName ,MiddleName ,LastName ,DateofBirth,EmailAddress)
+VALUES (8, 'vamshi','anumadla','reddy', '20040824', 'vamshi@gmail.com');
+
+INSERT INTO dbo.Employee  (EmpID ,FirstName ,MiddleName ,LastName ,DateofBirth,EmailAddress)
+VALUES (9, 'balu','komma','goni', '19980824', 'balu@gmail.com');
+
+INSERT INTO dbo.Employee  (EmpID ,FirstName ,MiddleName ,LastName ,DateofBirth,EmailAddress)
+VALUES (10, 'sunil','jushi','bapan', '20010824', 'sunil@gmail.com');
+
+3.CREATE TABLE dbo.Employee (
+    EmpID int NOT NULL PRIMARY KEY,
+    FirstName varchar(50),
+    MiddleName varchar(50),
+    LastName varchar(50),
+    DateofBirth date,
+    EmailAddress varchar(50)
+);
+INSERT INTO dbo.Employee (EmpID ,FirstName ,MiddleName ,LastName ,DateofBirth,EmailAddress)
+VALUES (5, 'sunil','jushi','bapan', '20000824', 'sunil@gmail.com');
+Msg 2627, Level 14, State 1, Line 54
+Violation of PRIMARY KEY constraint 'PK__Employee__AF2DBA79A88F5826'. Cannot insert duplicate key in object 'dbo.Employee'. The duplicate key value is (5).
+The statement has been terminated.
+
+4.CREATE TABLE dbo.Employee (
+    EmpID int, 
+    FirstName varchar(50),
+    MiddleName varchar(50),
+    LastName varchar(50),
+    DateofBirth date,
+    EmailAddress varchar(50) NOT NULL PRIMARY KEY
+);
+INSERT INTO dbo.Employee (EmpID ,FirstName ,MiddleName ,LastName ,DateofBirth,EmailAddress)
+VALUES (5, 'sunil','jushi','bapan', '20000824', 'sunil@gmail.com');
+Msg 2627, Level 14, State 1, Line 69
+Violation of PRIMARY KEY constraint 'PK__Employee__49A14741D1B14587'. Cannot insert duplicate key in object 'dbo.Employee'. The duplicate key value is (sunil@gmail.com).
+The statement has been terminated.
+
+5.CREATE TABLE dbo.Employee (
+    EmpID int, 
+    FirstName varchar(50),
+    MiddleName varchar(50),
+    LastName varchar(50),
+    DateofBirth date check( DateofBirth between '19500101' and 'sysdate' ),
+    EmailAddress varchar(50)
+);
+INSERT INTO Employee(EmpID ,FirstName ,MiddleName ,LastName ,DateofBirth,EmailAddress)
+VALUES (5, 'Hardik','pandya','kiran', '19470815', 'hardik@gmail.com');
+Msg 547, Level 16, State 0, Line 83
+The INSERT statement conflicted with the CHECK constraint "CK__Employee__Dateof__3B40CD36". The conflict occurred in database "AdventureWorksDW2017", table "dbo.Employee", column 'DateofBirth'.
+The statement has been terminated.
+
+6.UPDATE Employee
+SET EmailAddress= 'assignment@pramati.com' WHERE EmpID = 1;

@@ -1,0 +1,36 @@
+ETL Assignment-4
+
+1.select FirstName, LastName , departmentname,Title, BaseRate from DimEmployee where BaseRate=
+(select max(BaseRate) as MaxBaseRate from DimEmployee where DepartmentName='Production')
+select FirstName, LastName , departmentname,Title, BaseRate from DimEmployee where BaseRate=
+(select max(BaseRate) as MaxBaseRate from DimEmployee where DepartmentName='Production Control')
+select FirstName, LastName , departmentname,Title, BaseRate from DimEmployee where BaseRate=
+(select max(BaseRate) as MaxBaseRate from DimEmployee where DepartmentName='Engineering')
+select FirstName, LastName , departmentname,Title, BaseRate from DimEmployee where BaseRate=
+(select max(BaseRate) as MaxBaseRate from DimEmployee where DepartmentName='Marketing')
+select FirstName, LastName , departmentname,Title, BaseRate from DimEmployee where BaseRate=
+(select max(BaseRate) as MaxBaseRate from DimEmployee where DepartmentName='Tool Design')
+select FirstName, LastName , departmentname,Title, BaseRate from DimEmployee where BaseRate=
+(select max(BaseRate) as MaxBaseRate from DimEmployee where DepartmentName='Information Services')
+select FirstName, LastName , departmentname,Title, BaseRate from DimEmployee where BaseRate=
+(select max(BaseRate) as MaxBaseRate from DimEmployee where DepartmentName='Human Resources')
+select FirstName, LastName , departmentname,Title, BaseRate from DimEmployee where BaseRate=
+(select max(BaseRate) as MaxBaseRate from DimEmployee where DepartmentName='Shipping and Receiving')
+select FirstName, LastName , departmentname,Title, BaseRate from DimEmployee where BaseRate=
+(select max(BaseRate) as MaxBaseRate from DimEmployee where DepartmentName='Quality Assurance')
+select FirstName, LastName , departmentname,Title, BaseRate from DimEmployee where BaseRate=
+(select max(BaseRate) as MaxBaseRate from DimEmployee where DepartmentName='Facilities and Maintenance')
+select FirstName, LastName , departmentname,Title, BaseRate from DimEmployee where BaseRate=
+(select max(BaseRate) as MaxBaseRate from DimEmployee where DepartmentName='Document Control')
+select FirstName, LastName , departmentname,Title, BaseRate from DimEmployee where BaseRate=
+(select max(BaseRate) as MaxBaseRate from DimEmployee where DepartmentName='Finance')
+select FirstName, LastName , departmentname,Title, BaseRate from DimEmployee where BaseRate=
+(select max(BaseRate) as MaxBaseRate from DimEmployee where DepartmentName='Research and Development')
+select FirstName, LastName , departmentname,Title, BaseRate from DimEmployee where BaseRate=
+(select max(BaseRate) as MaxBaseRate from DimEmployee where DepartmentName='Executive')
+select FirstName, LastName , departmentname,Title, BaseRate from DimEmployee where BaseRate=
+(select max(BaseRate) as MaxBaseRate from DimEmployee where DepartmentName='Sales')
+
+2.SELECT TOP 1 SalesAmount as ThirdHighestSalesAmount FROM (SELECT TOP 3 SalesAmount
+from ((DimCustomer inner join DimGeography on DimCustomer.GeographyKey=DimGeography.GeographyKey)
+inner join FactInternetSales on DimCustomer.CustomerKey=FactInternetSales.CustomerKey)) as ThirdHighAmount ORDER BY SalesAmount ASC

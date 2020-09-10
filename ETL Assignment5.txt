@@ -1,0 +1,7 @@
+ETL Assignment-5
+
+1.SELECT EmailAddress, COUNT(EmailAddress) as RepeatedNoOfTimes
+FROM DimEmployee GROUP BY EmailAddress HAVING COUNT(EmailAddress) > 1;
+
+2.SELECT * FROM DimEmployee 
+WHERE StartDate in ( SELECT MAX(StartDate) from DimEmployee group by (StartDate))

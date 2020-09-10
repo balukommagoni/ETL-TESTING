@@ -1,0 +1,10 @@
+ETL Assignment-2
+
+1.select FirstName, LastName, EmailAddress,Title from DimEmployee where Title = 'Database Administrator'
+
+2.select FirstName, LastName, EnglishCountryRegionName,EnglishOccupation from DimCustomer inner join DimGeography 
+on DimCustomer.GeographyKey=DimGeography.GeographyKey 
+where EnglishOccupation='Skilled Manual'and EnglishCountryRegionName='France'
+
+3.select city, EnglishCountryRegionName,DimCustomer.GeographyKey from DimCustomer inner join DimGeography
+ on DimCustomer.GeographyKey = DimGeography.GeographyKey 
